@@ -1,0 +1,642 @@
+{
+  "info": {
+    "name": "Order Management - Search and Sort APIs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ],
+  "item": [
+    {
+      "name": "Status PENDING",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders/searchStatus?status=PENDING",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders",
+            "searchStatus"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "PENDING"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "const data = pm.response.json();",
+              "pm.test(\"Response is array\", () => pm.expect(data).to.be.an(\"array\"));",
+              "pm.test(\"5 matching sample orders\", () => { pm.expect(data.length).to.eql(5); data.forEach(o => pm.expect(o.status).to.eql(\"PENDING\")); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Status SHIPPING",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders/searchStatus?status=SHIPPING",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders",
+            "searchStatus"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "SHIPPING"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "const data = pm.response.json();",
+              "pm.test(\"Response is array\", () => pm.expect(data).to.be.an(\"array\"));",
+              "pm.test(\"5 matching sample orders\", () => { pm.expect(data.length).to.eql(5); data.forEach(o => pm.expect(o.status).to.eql(\"SHIPPING\")); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Status DELIVERED",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders/searchStatus?status=DELIVERED",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders",
+            "searchStatus"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "DELIVERED"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "const data = pm.response.json();",
+              "pm.test(\"Response is array\", () => pm.expect(data).to.be.an(\"array\"));",
+              "pm.test(\"5 matching sample orders\", () => { pm.expect(data.length).to.eql(5); data.forEach(o => pm.expect(o.status).to.eql(\"DELIVERED\")); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Status CANCELLED",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders/searchStatus?status=CANCELLED",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders",
+            "searchStatus"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "CANCELLED"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "const data = pm.response.json();",
+              "pm.test(\"Response is array\", () => pm.expect(data).to.be.an(\"array\"));",
+              "pm.test(\"5 matching sample orders\", () => { pm.expect(data.length).to.eql(5); data.forEach(o => pm.expect(o.status).to.eql(\"CANCELLED\")); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Customer containing Minh",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders/searchByCustomer?customerName=Minh",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders",
+            "searchByCustomer"
+          ],
+          "query": [
+            {
+              "key": "customerName",
+              "value": "Minh"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "const data = pm.response.json();",
+              "pm.test(\"Response is array\", () => pm.expect(data).to.be.an(\"array\"));",
+              "pm.test(\"4 matching sample orders\", () => { pm.expect(data.length).to.eql(4); data.forEach(o => pm.expect(o.customerName).to.include(\"Minh\")); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Customer not found",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders/searchByCustomer?customerName=NO_MATCH_999",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders",
+            "searchByCustomer"
+          ],
+          "query": [
+            {
+              "key": "customerName",
+              "value": "NO_MATCH_999"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "const data = pm.response.json();",
+              "pm.test(\"Response is array\", () => pm.expect(data).to.be.an(\"array\"));",
+              "pm.test(\"Empty array\", () => pm.expect(data).to.eql([]));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Status not found",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders/searchStatus?status=UNKNOWN",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders",
+            "searchStatus"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "UNKNOWN"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "const data = pm.response.json();",
+              "pm.test(\"Response is array\", () => pm.expect(data).to.be.an(\"array\"));",
+              "pm.test(\"Empty array\", () => pm.expect(data).to.eql([]));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Missing status",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders/searchStatus",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders",
+            "searchStatus"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Missing customerName",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders/searchByCustomer",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders",
+            "searchByCustomer"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sort price descending",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders/sort?sortBy=totalPrice&dir=desc",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders",
+            "sort"
+          ],
+          "query": [
+            {
+              "key": "sortBy",
+              "value": "totalPrice"
+            },
+            {
+              "key": "dir",
+              "value": "desc"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "const data = pm.response.json();",
+              "pm.test(\"20 sample orders\", () => { pm.expect(data).to.be.an(\"array\"); pm.expect(data.length).to.eql(20); });",
+              "const values = data.map(o => o.totalPrice);",
+              "pm.test(\"All sort values are numeric\", () => values.forEach(v => { pm.expect(v).to.be.a(\"number\"); pm.expect(Number.isFinite(v)).to.eql(true); }));",
+              "pm.test(\"Correct order for every adjacent pair\", () => { for (let i = 1; i < values.length; i++) { pm.expect(values[i-1]).to.be.at.least(values[i]); } });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sort price ascending",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders/sort?sortBy=totalPrice&dir=asc",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders",
+            "sort"
+          ],
+          "query": [
+            {
+              "key": "sortBy",
+              "value": "totalPrice"
+            },
+            {
+              "key": "dir",
+              "value": "asc"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "const data = pm.response.json();",
+              "pm.test(\"20 sample orders\", () => { pm.expect(data).to.be.an(\"array\"); pm.expect(data.length).to.eql(20); });",
+              "const values = data.map(o => o.totalPrice);",
+              "pm.test(\"All sort values are numeric\", () => values.forEach(v => { pm.expect(v).to.be.a(\"number\"); pm.expect(Number.isFinite(v)).to.eql(true); }));",
+              "pm.test(\"Correct order for every adjacent pair\", () => { for (let i = 1; i < values.length; i++) { pm.expect(values[i-1]).to.be.at.most(values[i]); } });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sort newest first",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders/sort?sortBy=createdAt&dir=desc",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders",
+            "sort"
+          ],
+          "query": [
+            {
+              "key": "sortBy",
+              "value": "createdAt"
+            },
+            {
+              "key": "dir",
+              "value": "desc"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "const data = pm.response.json();",
+              "pm.test(\"20 sample orders\", () => { pm.expect(data).to.be.an(\"array\"); pm.expect(data.length).to.eql(20); });",
+              "const values = data.map(o => o.createdAt ? Date.parse(o.createdAt) : NaN);",
+              "pm.test(\"All sort values are numeric\", () => values.forEach(v => { pm.expect(v).to.be.a(\"number\"); pm.expect(Number.isFinite(v)).to.eql(true); }));",
+              "pm.test(\"Correct order for every adjacent pair\", () => { for (let i = 1; i < values.length; i++) { pm.expect(values[i-1]).to.be.at.least(values[i]); } });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sort oldest first",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders/sort?sortBy=createdAt&dir=asc",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders",
+            "sort"
+          ],
+          "query": [
+            {
+              "key": "sortBy",
+              "value": "createdAt"
+            },
+            {
+              "key": "dir",
+              "value": "asc"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "const data = pm.response.json();",
+              "pm.test(\"20 sample orders\", () => { pm.expect(data).to.be.an(\"array\"); pm.expect(data.length).to.eql(20); });",
+              "const values = data.map(o => o.createdAt ? Date.parse(o.createdAt) : NaN);",
+              "pm.test(\"All sort values are numeric\", () => values.forEach(v => { pm.expect(v).to.be.a(\"number\"); pm.expect(Number.isFinite(v)).to.eql(true); }));",
+              "pm.test(\"Correct order for every adjacent pair\", () => { for (let i = 1; i < values.length; i++) { pm.expect(values[i-1]).to.be.at.most(values[i]); } });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Default sort newest first",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders/sort",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders",
+            "sort"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "const data = pm.response.json();",
+              "pm.test(\"20 sample orders\", () => { pm.expect(data).to.be.an(\"array\"); pm.expect(data.length).to.eql(20); });",
+              "const values = data.map(o => o.createdAt ? Date.parse(o.createdAt) : NaN);",
+              "pm.test(\"All sort values are numeric\", () => values.forEach(v => { pm.expect(v).to.be.a(\"number\"); pm.expect(Number.isFinite(v)).to.eql(true); }));",
+              "pm.test(\"Correct order for every adjacent pair\", () => { for (let i = 1; i < values.length; i++) { pm.expect(values[i-1]).to.be.at.least(values[i]); } });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Invalid sort field",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders/sort?sortBy=unknown&dir=asc",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders",
+            "sort"
+          ],
+          "query": [
+            {
+              "key": "sortBy",
+              "value": "unknown"
+            },
+            {
+              "key": "dir",
+              "value": "asc"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Invalid direction",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders/sort?sortBy=totalPrice&dir=wrong",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders",
+            "sort"
+          ],
+          "query": [
+            {
+              "key": "sortBy",
+              "value": "totalPrice"
+            },
+            {
+              "key": "dir",
+              "value": "wrong"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
